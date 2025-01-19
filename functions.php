@@ -156,9 +156,9 @@ function beli($data) {
     }
     $type_senjata = $data["type_senjata"];
     $warna = $data["warna"];
-    // $qty = $data["qty"];
+    $qty = $data["qty"];
     $stock = $data["stock"];
-    // $harga = $data["harga"];
+    $harga = $data["harga"];
     $tgl_update = date("Y-m-d H:i:s");
     $tgl_input = date("Y-m-d H:i:s");
     $data = "SELECT SUM(qty*harga) as total FROM tokosenjata";
@@ -173,7 +173,8 @@ function beli($data) {
             total = $total
             WHERE id = $id
             ";
-    $query = "INSERT INTO penjualan VALUES (0 , '$nama_senjata', '$gambar', '$type_senjata', '$warna', '$tgl_update', '$tgl_input', '$stock', '$total')";
+    $query = "INSERT INTO penjualan VALUES 
+    (0 , '$nama_senjata', '$gambar', '$type_senjata', '$warna', '$tgl_update', '$tgl_input', '$stock', '$total', '$qty', '$harga')";
     mysqli_query($conn, $query);
     return mysqli_affected_rows($conn);
 }
