@@ -88,6 +88,7 @@ if(isset($_POST["cari"]) ) {
         <th>Harga</th>
         <th>Tanggal Update</th>
         <th>Tanggal Input</th>
+        
     </tr>
     <?php $i = 1; ?>
     <?php foreach ($weapon as $row) : ?>
