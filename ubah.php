@@ -41,6 +41,11 @@ if(isset($_POST["submit"]) ) {
                 value="<?= $weapon["nama_senjata"];?>">
             </li>
             <li>
+                <label for="id_barang">SKU</label>
+                <input type="text" name="id_barang" id="id_barang" 
+                value="<?= $weapon["id_barang"];?>">
+            </li>
+            <li>
                 <label for="gambar">Gambar</label>
                 <img src="img/<?= $weapon["gambar"];?>" width="90">
                 <input type="file" name="gambar" id="gambar">
