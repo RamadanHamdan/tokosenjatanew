@@ -73,16 +73,18 @@ if(isset($_POST["cari"]) ) {
     <?php endif; ?>
 
     </form><br>
-
+    
     <table border="5" cellpadding="5" cellspacing="5">
     <tr>
         <th>No</th>
         <th>Aksi</th>
+        <th>Id Barang</th>
         <th>Nama Senjata</th>
         <th>Gambar</th>
         <th>Type Senjata</th>
         <th>Warna</th>
-        <th>Stock</th>
+        <th>Stock Awal</th>
+        <th>Sisa Stock</th>
         <th>Harga</th>
         <th>Tanggal Update</th>
         <th>Tanggal Input</th>
@@ -97,11 +99,13 @@ if(isset($_POST["cari"]) ) {
                 return confirm('sure?');">hapus</a>
             <a href="beli.php?id=<?= $row["id"];?>">beli ?</a>
         </td>
+        <td><?= $row["id_barang"];?></td>
         <td><?= $row["nama_senjata"];?></td>
         <td><img src="img/<?= $row["gambar"];?>"width="100"></td>
         <td><?= $row["type_senjata"];?></td>
         <td><?= $row["warna"];?></td>
         <td><?= $row["stock"];?></td>
+        <td><?= $row["sisa_stock"];?></td>
         <td><?= $row["harga"];?></td>
         <td><?= $row["tgl_update"];?></td>
         <td><?= $row["tgl_input"];?></td>
