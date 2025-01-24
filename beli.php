@@ -18,18 +18,6 @@ if(isset($_POST["beli"]) ) {
         </script>";
     }
 }
-if(isset($_POST["total"]) ) {
-    if(beli($stock) > 0 ) {
-        $stock * $qty;
-        $total = $stock * $qty;
-        echo "<script>
-            alert('data berhasil dibeli');
-            document.location.href = 'index.php';
-            </script>";
-    } else {
-        return $total;
-    }
-}
 
 ?>
 <!DOCTYPE html>
@@ -40,35 +28,44 @@ if(isset($_POST["total"]) ) {
     <title>Ubah Data</title>
 </head>
 <body>
-    <form action="" method="post" enctype="multipart/form-data">
+    <form action="" method="post" enctype="multipart/form-data"> 
         <input type="hidden" name="id" value="<?=$weapon["id"];?>">
         <input type="hidden" name="gambarlama" value="<?= $weapon["gambar"];?>">
-        <ul>     
+        
+        <ul>
+                <label for="id_barang"></label>
+                <input type="hidden" name="id_barang" id="id_barang" 
+                value="<?= $weapon["id_barang"];?>">     
             <li>
                 <label for="nama_senjata">Nama Senjata</label>
                 <input type="text" name="nama_senjata" id="nama_senjata" 
                 value="<?= $weapon["nama_senjata"];?>">
             </li>
+
             <li>
                 <label for="gambar">Gambar</label>
                 <img src="img/<?= $weapon["gambar"];?>" width="90">
                 <input type="file" name="gambar" id="gambar">
             </li>
+
             <li>
                 <label for="type_senjata">Type_Senjata</label>
                 <input type="text" name="type_senjata" id="type_senjata" 
                 value="<?= $weapon["type_senjata"];?>">
             </li>
+
             <li>
                 <label for="warna">Warna</label>
                 <input type="text" name="warna" id="warna" 
                 value="<?= $weapon["warna"];?>">
             </li>
+
             <li>
                 <label for="stock">Stock</label>
                 <input type="number" name="stock" id="stock" 
                 value="<?= $weapon["stock"];?>">
             </li>
+
             <li>
                 <label for="qty">Quantity Beli</label>
                 <input type="number" name="qty" id="qty">
@@ -83,7 +80,7 @@ if(isset($_POST["total"]) ) {
                 <input type="date" class="form-control" name="tgl_input" id="tgl_input" 
                 value="<?=date('Y-m-d H:i:s');?>">
             </li>
-            <button type="beli" name="beli" id="total">Beli Senjata</button><br>
+            <button type="beli" name="beli" id="beli">Beli Senjata</button><br>
             <a href="index.php">Lihat Data</a>
         </ul>
     </form>
