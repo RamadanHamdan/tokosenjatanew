@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 $conn = mysqli_connect('localhost','root','root','phpdasar');
 date_default_timezone_set("Asia/Jakarta");
@@ -14,6 +14,7 @@ function query($query) {
 
 function tambah($data) {
     global $conn;
+    $id_barang = htmlspecialchars($data["id_barang"]);
     $nama_senjata = htmlspecialchars($data["nama_senjata"]);
     $gambar = htmlspecialchars($data["gambar"]);
     $type_senjata = htmlspecialchars($data["type_senjata"]);
@@ -21,7 +22,7 @@ function tambah($data) {
     $stock = htmlspecialchars($data["stock"]);
     $harga = htmlspecialchars($data["harga"]);
     $tgl_input = date("Y-m-d H:i:s");
-    $query = "INSERT INTO tokosenjata VALUES (0, '$nama_senjata', '$gambar','$type_senjata','$warna', '$stock','$harga','$tgl_input')";
+    $query = "INSERT INTO tokosenjata VALUES (0,'$id_barang', '$nama_senjata', '$gambar','$type_senjata','$warna', '$stock','$harga','$tgl_input')";
     
     mysqli_query($conn, $query);
     return mysqli_affected_rows($conn);
@@ -30,6 +31,7 @@ function tambah($data) {
 function ubah($data) {
     global $conn;
     $id = $data["id"];
+    $id_barang = htmlspecialchars($data["id_barang"]);
     $nama_senjata = htmlspecialchars($data["nama_senjata"]);
     $gambarlama = htmlspecialchars($data["gambarlama"]);
     if($_FILES['gambar']['error'] === 4 ) {
@@ -44,6 +46,7 @@ function ubah($data) {
     $tgl_update = date("Y-m-d H:i:s");
     
     $query = "UPDATE tokosenjata SET
+            id_barang = '$id_barang',
             nama_senjata = '$nama_senjata',
             gambar = '$gambar',
             type_senjata = '$type_senjata',
@@ -98,6 +101,7 @@ function upload() {
 function cari($keyword) {
     $query = "SELECT * FROM tokosenjata 
             WHERE 
+            id_barang LIKE '%$keyword%' OR
             nama_senjata LIKE '%$keyword%' OR
             type_senjata LIKE '%$keyword%' OR
             warna LIKE '%$keyword%' OR
@@ -146,7 +150,7 @@ function registrasi($data) {
 function beli($data) {
     global $conn;
     $id = $data["id"];
-    $total = $data["total"];
+    $id_barang = $data["id_barang"];
     $nama_senjata = $data["nama_senjata"];
     $gambarlama = $data["gambarlama"];
     if($_FILES['gambar']['error'] === 4 ) {
@@ -156,28 +160,75 @@ function beli($data) {
     }
     $type_senjata = $data["type_senjata"];
     $warna = $data["warna"];
-    $qty = $data["qty"];
     $stock = $data["stock"];
+    $qty = $data["qty"];
+    $total = $data["total"];
     $harga = $data["harga"];
     $tgl_update = date("Y-m-d H:i:s");
     $tgl_input = date("Y-m-d H:i:s");
-    $data = "SELECT SUM(qty*harga) as total FROM tokosenjata";
+    // $query = "INSERT INTO transaksi 
+    // SELECT tokosenjata.id_transaksi, 
+    // tokosenjata.id_barang, 
+    // tokosenjata.nama_senjata,
+    // tokosenjata.gambar,
+    // tokosenjata.type_senjata,
+    // tokosenjata.warna,
+    // HAVING SUM(penjualan.$qty*tokosenjata.harga) as total,
+    // tokosenjata.tgl_input,
+    // tokosenjata.tgl_update FROM tokosenjata LEFT JOIN penjualan ON tokosenjata.id = penjualan.id_penjualan 
+    // GROUP BY tokosenjata.id_barang ORDER BY id DESC";
     $query = "UPDATE tokosenjata SET
             nama_senjata = '$nama_senjata',
             gambar = '$gambar',
             type_senjata = '$type_senjata',
             warna = '$warna',
-            tgl_update = '$tgl_update',
             tgl_input = '$tgl_input',
-            stock = $stock,
-            total = $total
+            tgl_update = '$tgl_update',
+            stock = '$stock',
+            sisa_stock = '$stock' - '$qty'
             WHERE id = $id
             ";
     $query = "INSERT INTO penjualan VALUES 
-    (0 , '$nama_senjata', '$gambar', '$type_senjata', '$warna', '$tgl_update', '$tgl_input', '$stock', '$total', '$qty', '$harga')";
+    (0 , '$id_barang','$nama_senjata', '$gambar', '$type_senjata', '$warna', '$qty', '$harga', '$total', '$tgl_input', '$tgl_update')";
+    // $query = "SELECT "
     mysqli_query($conn, $query);
     return mysqli_affected_rows($conn);
 }
+
+
+// function penjualan($data) {
+//     global $conn;
+//     $id = $data["id"];
+//     $id_barang = $data["id_barang"];
+//     $nama_senjata = $data["nama_senjata"];
+//     $gambarlama = $data["gambarlama"];
+//     if($_FILES['gambar']['error'] === 4 ) {
+//         $gambar = $gambarlama;
+//     } else {
+//         $gambar = upload();
+//     }
+//     $type_senjata = $data["type_senjata"];
+//     $warna = $data["warna"];
+//     $qty = $data["qty"];
+//     $stock = $data["stock"];
+//     $total = $data["total"];
+//     $tgl_input = date("Y-m-d H:i:s");
+//     $tgl_update = date("Y-m-d H:i:s");
+//     $query = "UPDATE tokosenjata SET
+//             nama_senjata = '$nama_senjata',
+//             gambar = '$gambar',
+//             type_senjata = '$type_senjata',
+//             warna = '$warna',
+//             stock = '$stock',
+//             tgl_input = '$tgl_input',
+//             tgl_update = '$tgl_update'
+//             WHERE id = $id
+//             ";
+//     $query = "INSERT INTO penjualan VALUES 
+//     (0 , '$id_barang','$nama_senjata', '$gambar', '$type_senjata', '$warna', '$qty', '$total', '$tgl_input', '$tgl_update')";
+//     mysqli_query($conn, $query);
+//     return mysqli_affected_rows($conn);
+// }
 
 if(!function_exists('date')) {
     function date($format = 'Y-m-d H:i:s', $timestamp = null) {
