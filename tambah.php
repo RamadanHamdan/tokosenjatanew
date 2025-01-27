@@ -33,6 +33,8 @@ if(isset($_POST["submit"]) ) {
     <h1>Tambah Data Senjata</h1>
     <form action="" method="post">
     <ul>
+            <label for="id_barang">SKU</label>
+            <input type="text" name="id_barang" id="id_barang">
         <li>
             <label for="nama_senjata">Nama Senjata</label>
             <input type="text" name="nama_senjata" id="nama_senjata">
@@ -50,8 +52,12 @@ if(isset($_POST["submit"]) ) {
             <input type="text" name="warna" id="warna">
         </li>
         <li>
-            <label for="qty">Qty</label>
-            <input type="text" name="qty" id="qty">
+            <label for="stock">Stock</label>
+            <input type="number" name="stock" id="stock">
+        </li>
+        <li>
+            <label for="sisa_stock">Stock Awal</label>
+            <input type="number" name="sisa_stock" id="sisa_stock">
         </li>
         <li>
             <label for="harga">Harga</label>

@@ -21,7 +21,7 @@ $weapon = query($query);
         <th>Gambar</th>
         <th>Type Senjata</th>
         <th>Warna</th>
-        <th>Qty</th>
+        <th>Stock</th>
         <th>Harga</th>
     </tr>
     <?php $i = 1; ?>
@@ -37,7 +37,7 @@ $weapon = query($query);
         <td><img src="img/<?= $row["gambar"];?>"width="100"></td>
         <td><?= $row["type_senjata"];?></td>
         <td><?= $row["warna"];?></td>
-        <td><?= $row["qty"];?></td>
+        <td><?= $row["stock"];?></td>
         <td><?= $row["harga"];?></td>
        </tr>
     <?php $i++; ?>

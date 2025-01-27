@@ -66,6 +66,11 @@ if(isset($_POST["submit"]) ) {
                 value="<?= $weapon["stock"];?>">
             </li>
             <li>
+                <label for="sisa_stoc">Stock Awal</label>
+                <input type="number" name="sisa_stock" id="sisa_stock"
+                value="<?= $weapon["sisa_stock"];?>">
+            </li>
+            <li>
                 <label for="harga">Harga</label>
                 <input type="text" name="harga" id="harga" 
                 value="<?= $weapon["harga"];?>">

@@ -20,9 +20,11 @@ function tambah($data) {
     $type_senjata = htmlspecialchars($data["type_senjata"]);
     $warna = htmlspecialchars($data["warna"]);
     $stock = htmlspecialchars($data["stock"]);
+    $sisa_stock = htmlspecialchars($data["sisa_stock"]);
     $harga = htmlspecialchars($data["harga"]);
     $tgl_input = date("Y-m-d H:i:s");
-    $query = "INSERT INTO tokosenjata VALUES (0,'$id_barang', '$nama_senjata', '$gambar','$type_senjata','$warna', '$stock','$harga','$tgl_input')";
+    $tgl_update = date("Y-m-d H:i:s");
+    $query = "INSERT INTO tokosenjata VALUES (0,'$id_barang', '$nama_senjata', '$gambar', '$type_senjata', '$warna', '$stock' ,'$sisa_stock' ,'$harga' ,'$tgl_input','$tgl_update')";
     
     mysqli_query($conn, $query);
     return mysqli_affected_rows($conn);
@@ -164,6 +166,7 @@ function beli($data) {
     $qty = $data["qty"];
     $total = $data["total"];
     $harga = $data["harga"];
+    $sisa_stock = $data["sisa_stock"];
     $tgl_update = date("Y-m-d H:i:s");
     $tgl_input = date("Y-m-d H:i:s");
     // $query = "INSERT INTO transaksi 
@@ -178,13 +181,14 @@ function beli($data) {
     // tokosenjata.tgl_update FROM tokosenjata LEFT JOIN penjualan ON tokosenjata.id = penjualan.id_penjualan 
     // GROUP BY tokosenjata.id_barang ORDER BY id DESC";
     $query = "UPDATE tokosenjata SET
+            id_barang = '$id_barang',
             nama_senjata = '$nama_senjata',
             gambar = '$gambar',
             type_senjata = '$type_senjata',
             warna = '$warna',
             tgl_input = '$tgl_input',
             tgl_update = '$tgl_update',
-            stock = '$stock',
+            stock = '$sisa_stock',
             sisa_stock = '$stock' - '$qty'
             WHERE id = $id
             ";
