@@ -61,7 +61,7 @@ if(isset($_POST["submit"]) ) {
         </li>
         <li>
             <label for="harga">Harga</label>
-            <input type="text" name="harga" id="harga"> <br>
+            <input type="text" name="harga" id="harga"><br>
         <li>
             <label for="tgl_input">Tanggal</label>
             <input type="date" class="form-control" name="tgl_input" id="tgl_input" 
