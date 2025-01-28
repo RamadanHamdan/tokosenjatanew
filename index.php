@@ -14,7 +14,48 @@ $halamanAktif = (isset($_GET["halaman"]) ) ? $_GET["halaman"] : 1;
 $awalData = ($jumlahDataPerHalaman * $halamanAktif) - $jumlahDataPerHalaman;
 
 
-$weapon = query("SELECT * FROM tokosenjata LIMIT $awalData, $jumlahDataPerHalaman ");
+// $weapon = query("SELECT tokosenjata.id_barang,
+//                         penjualan.id_barang
+//                         FROM 
+//                         tokosenjata 
+//                         LEFT JOIN penjualan ON tokosenjata.id_barang = penjualan.id_barang GROUP BY tokosenjata.id_barang,
+//                         SELECT tokosenjata.nama_senjata,
+//                         penjualan.nama_senjata
+//                         FROM
+//                         tokosenjata
+//                         LEFT JOIN penjualan ON tokosenjata.nama_senjata = penjualan.nama_senjata GROUP BY tokosenjata.nama_senjata");
+                        $weapon = query("SELECT
+                                            tokosenjata.id, 
+                                            tokosenjata.id_barang,
+                                            tokosenjata.nama_senjata,
+                                            tokosenjata.gambar,
+                                            tokosenjata.type_senjata,
+                                            tokosenjata.warna,
+                                            tokosenjata.stock,
+                                            tokosenjata.sisa_stock,
+                                            COUNT(tokosenjata.stock - penjualan.qty_beli) AS sisa_stock,
+                                            tokosenjata.harga,
+                                            tokosenjata.tgl_input,
+                                            tokosenjata.tgl_update
+                                        FROM 
+                                            tokosenjata 
+                                        LEFT JOIN 
+                                            penjualan 
+                                        ON 
+                                            tokosenjata.id_barang = penjualan.id_barang 
+                                        GROUP BY 
+                                            tokosenjata.id,
+                                            tokosenjata.id_barang,
+                                            tokosenjata.nama_senjata,
+                                            tokosenjata.gambar,
+                                            tokosenjata.type_senjata,
+                                            tokosenjata.warna,
+                                            tokosenjata.stock,
+                                            tokosenjata.sisa_stock,
+                                            tokosenjata.harga,
+                                            tokosenjata.tgl_input,
+                                            tokosenjata.tgl_update");
+
 
 
 if(isset($_POST["cari"]) ) {
@@ -88,7 +129,7 @@ if(isset($_POST["cari"]) ) {
         <th>Harga</th>
         <th>Tanggal Update</th>
         <th>Tanggal Input</th>
-        
+
     </tr>
     <?php $i = 1; ?>
     <?php foreach ($weapon as $row) : ?>
@@ -111,6 +152,7 @@ if(isset($_POST["cari"]) ) {
         <td><?= $row["tgl_update"];?></td>
         <td><?= $row["tgl_input"];?></td>
        </tr>
+       
     <?php $i++; ?>
     <?php endforeach; ?>
     </table>
