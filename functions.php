@@ -188,8 +188,8 @@ function beli($data) {
             warna = '$warna',
             tgl_input = '$tgl_input',
             tgl_update = '$tgl_update',
-            stock = '$sisa_stock',
-            sisa_stock = '$stock' - '$qty'
+            stock = '$stock',
+            sisa_stock = '$sisa_stock'
             WHERE id = $id
             ";
     $query = "INSERT INTO penjualan VALUES 
