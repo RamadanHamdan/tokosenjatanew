@@ -4,8 +4,9 @@ require '../functions.php';
 
 $keyword = $_GET["keyword_penjualan"];
 
-$query = "SELECT * FROM penjualan 
-            WHERE 
+$query = "SELECT id_barang,nama_senjata,gambar, type_senjata, warna, qty_beli, harga, total, tgl_input, tgl_update FROM penjualan 
+            WHERE
+            id_barang LIKE '%$keyword%' OR 
             nama_senjata LIKE '%$keyword%' OR
             type_senjata LIKE '%$keyword%' OR
             warna LIKE '%$keyword%'
@@ -23,6 +24,7 @@ $weapon = query($query);
         <th>Warna</th>
         <th>Qty_Beli</th>
         <th>Harga</th>
+        <th>Total</th>
         <th>Tanggal Update</th>
         <th>Tanggal Input</th>
     </tr>
@@ -31,10 +33,6 @@ $weapon = query($query);
        <tr>
     <td><?= $i; ?></td>
     <td>
-    <a href="ubah.php?id=<?= $row["id"]; ?>">ubah</a> |
-            <a href="hapus.php?id=<?= $row["id"]; ?>" onclick="
-                return confirm('sure?');">hapus</a>
-            <a href="beli.php?id=<?= $row["id"];?>">beli ?</a>
         </td>
         <td><?= $row["id_barang"];?></td>
         <td><?= $row["nama_senjata"];?></td>
@@ -43,6 +41,7 @@ $weapon = query($query);
         <td><?= $row["warna"];?></td>
         <td><?= $row["qty_beli"];?></td>
         <td><?= $row["harga"];?></td>
+        <td><?= $row["total"];?></td>
         <td><?= $row["tgl_update"];?></td>
         <td><?= $row["tgl_input"];?></td>
        </tr>
