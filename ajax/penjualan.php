@@ -17,6 +17,7 @@ $weapon = query($query);
 <table border="5" cellpadding="5" cellspacing="5">
     <tr>
         <th>No</th>
+        <th>Null</th>
         <th>Id Barang</th>
         <th>Nama Senjata</th>
         <th>Gambar</th>
