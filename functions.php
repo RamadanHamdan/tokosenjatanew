@@ -169,17 +169,6 @@ function beli($data) {
     $sisa_stock = $data["sisa_stock"];
     $tgl_update = date("Y-m-d H:i:s");
     $tgl_input = date("Y-m-d H:i:s");
-    // $query = "INSERT INTO transaksi 
-    // SELECT tokosenjata.id_transaksi, 
-    // tokosenjata.id_barang, 
-    // tokosenjata.nama_senjata,
-    // tokosenjata.gambar,
-    // tokosenjata.type_senjata,
-    // tokosenjata.warna,
-    // HAVING SUM(penjualan.$qty*tokosenjata.harga) as total,
-    // tokosenjata.tgl_input,
-    // tokosenjata.tgl_update FROM tokosenjata LEFT JOIN penjualan ON tokosenjata.id = penjualan.id_penjualan 
-    // GROUP BY tokosenjata.id_barang ORDER BY id DESC";
     $query = "UPDATE tokosenjata SET
             id_barang = '$id_barang',
             nama_senjata = '$nama_senjata',
@@ -189,7 +178,7 @@ function beli($data) {
             tgl_input = '$tgl_input',
             tgl_update = '$tgl_update',
             stock = '$stock',
-            sisa_stock = '$sisa_stock'
+            sisa_stock = '$stock' - '$sisa_stock'
             WHERE id = $id
             ";
     $query = "INSERT INTO penjualan VALUES 
@@ -241,4 +230,16 @@ if(!function_exists('date')) {
         }
         return gmdate($format, $timestamp);
     }
+}
+
+function cari_penjualan($keyword) {
+    $query = "SELECT * FROM penjualan 
+            WHERE 
+            id_barang LIKE '%$keyword%' OR
+            nama_senjata LIKE '%$keyword%' OR
+            type_senjata LIKE '%$keyword%' OR
+            warna LIKE '%$keyword%' OR
+            harga LIKE '%$keyword%' 
+            ";
+    return query($query);
 }
