@@ -8,10 +8,10 @@ $jumlahHalaman = ceil($jumlahData / $jumlahDataPerHalaman);
 $halamanAktif = (isset($_GET["halaman"]) ) ? $_GET["halaman"] : 1;
 $awalData = ($jumlahDataPerHalaman * $halamanAktif) - $jumlahDataPerHalaman;
 
-$weapon = query("SELECT * FROM penjualan");
+$weapon = query("SELECT id_barang,nama_senjata,gambar, type_senjata, warna, qty_beli, harga, total, tgl_input, tgl_update FROM penjualan");
 
 if(isset($_POST["cari_penjualan"]) ) {
-    $weapon = cari($_POST["keyword_penjualan"]);
+    $weapon = cari_penjualan($_POST["keyword_penjualan"]);
 }
 
 ?>
@@ -78,6 +78,7 @@ if(isset($_POST["cari_penjualan"]) ) {
         <th>Warna</th>
         <th>Qty_Beli</th>
         <th>Harga</th>
+        <th>Total</th>
         <th>Tanggal Update</th>
         <th>Tanggal Input</th>
 
@@ -92,6 +93,7 @@ if(isset($_POST["cari_penjualan"]) ) {
         <td><?= $row["type_senjata"];?></td>
         <td><?= $row["warna"];?></td>
         <td><?= $row["qty_beli"];?></td>
+        <td><?= $row["harga"];?></td>
         <td><?= $row["total"];?></td>
         <td><?= $row["tgl_update"];?></td>
         <td><?= $row["tgl_input"];?></td>
