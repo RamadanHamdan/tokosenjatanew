@@ -32,8 +32,8 @@ $awalData = ($jumlahDataPerHalaman * $halamanAktif) - $jumlahDataPerHalaman;
                                             tokosenjata.type_senjata,
                                             tokosenjata.warna,
                                             tokosenjata.stock,
-                                            tokosenjata.sisa_stock,
-                                            COUNT(tokosenjata.stock - penjualan.qty_beli) AS sisa_stock,
+                                            SUM(tokosenjata.sisa_stock) AS sisa_stock,
+                                            SUM(penjualan.qty_beli - tokosenjata.stock) AS sisa_stock,
                                             tokosenjata.harga,
                                             tokosenjata.tgl_input,
                                             tokosenjata.tgl_update
@@ -124,7 +124,7 @@ if(isset($_POST["cari"]) ) {
         <th>Gambar</th>
         <th>Type Senjata</th>
         <th>Warna</th>
-        <th>Stock Awal</th>
+        <th>Stock</th>
         <th>Sisa Stock</th>
         <th>Harga</th>
         <th>Tanggal Update</th>
