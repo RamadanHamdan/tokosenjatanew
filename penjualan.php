@@ -1,50 +1,105 @@
-<?php
-require_once __DIR__ . '/vendor/autoload.php';
+<?php 
 
 require 'functions.php';
+
+$jumlahDataPerHalaman = 10;
+$jumlahData = count(query("SELECT * FROM penjualan"));
+$jumlahHalaman = ceil($jumlahData / $jumlahDataPerHalaman);
+$halamanAktif = (isset($_GET["halaman"]) ) ? $_GET["halaman"] : 1;
+$awalData = ($jumlahDataPerHalaman * $halamanAktif) - $jumlahDataPerHalaman;
+
 $weapon = query("SELECT * FROM penjualan");
 
-$mpdf = new \Mpdf\Mpdf();
+if(isset($_POST["cari_penjualan"]) ) {
+    $weapon = cari($_POST["keyword_penjualan"]);
+}
 
-$html = '<!DOCTYPE html>
+?>
+
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Daftar Senjata</title>
-    <link rel="stylesheet" href="css/print.css">
+    <style>
+        .loader {
+            width: 100px;
+            position: absolute;
+            top: 100px;
+            z-index: -1;
+            display: none;
+        }
+    </style>
+    <script src="js/jquery-3.7.1.min.js"></script>
+    <script src="js/script_penjualan.js"></script>
 </head>
 <body>
-    <h1>Daftar Penjualan</h1>
-    <table border="1" cellpadding="10" cellspacing="0">
+    <a href="logout.php" class="logout">Logout</a> | <a href="cetak.php" target="blank">Cetak</a> | <a href="print_penjualan.php" target="blank">Penjualan</a>
+    <h1>Daftar Senjata</h1>
+
+    <form action="" method="post" class="form-cari-penjualan">
+
+        <input type="text" name="keyword_penjualan" size="30"
+        autofocus placeholed="input here" autofocus="off" id="keyword_penjualan">
+        <button type="submit" name="cari_penjualan" id="tombol-cari-penjualan">Cari</button>
+
+        <img src="img/loader.gif" class="loader">
+    </form><br>
+    <div id="container">
+    <!-- page navigasi -->
+    <?php if( $halamanAktif > 1) : ?>
+    <a href="?halaman=<?= $halamanAktif - 1; ?>">&laquo;</a>
+    <?php endif; ?>
+    
+    <?php for($i = 1; $i <= $jumlahHalaman; $i++ ) : ?>
+        <?php if( $i == $halamanAktif) : ?>
+        <a href="?halaman=<?= $i; ?>" style="font-weight: bold; color: red;
+        "><?= $i; ?></a>
+        <?php else : ?>
+            <a href="?halaman=<?= $i; ?>"><?= $i; ?></a>
+        <?php endif; ?>
+    <?php endfor; ?>
+
+    <?php if( $halamanAktif < $jumlahHalaman ) : ?>
+    <a href="?halaman=<?= $halamanAktif + 1; ?>">&raquo;</a>
+    <?php endif; ?>
+
+    </form><br>
+    
+    <table border="5" cellpadding="5" cellspacing="5">
     <tr>
         <th>No</th>
+        <th>Id Barang</th>
         <th>Nama Senjata</th>
         <th>Gambar</th>
         <th>Type Senjata</th>
         <th>Warna</th>
-        <th>Qty</th>
-        <th>Total</th>
-        <th>Tanggal Transaksi</th>
-    </tr>';
-    $i = 1;
-    foreach($weapon as $row) {
-        $html .= '<tr>
-            <td>'. $i++ .'</td>
-            <td>'. $row["nama_senjata"].'</td>
-            <td><img src="img/'. $row["gambar"] .'" width="50"></td>
-            <td>'. $row["type_senjata"].'</td>
-            <td>'. $row["warna"].'</td>
-            <td>'. $row["qty"].'</td>
-            <td>'. $row["total"].'</td>
-            <td>'. $row["tgl_input"].'</td>
-        </tr>';
-    }
+        <th>Qty_Beli</th>
+        <th>Harga</th>
+        <th>Tanggal Update</th>
+        <th>Tanggal Input</th>
 
-$html .= '</table>
+    </tr>
+    <?php $i = 1; ?>
+    <?php foreach ($weapon as $row) : ?>
+       <tr>
+    <td><?= $i; ?></td>
+        <td><?= $row["id_barang"];?></td>
+        <td><?= $row["nama_senjata"];?></td>
+        <td><img src="img/<?= $row["gambar"];?>"width="100"></td>
+        <td><?= $row["type_senjata"];?></td>
+        <td><?= $row["warna"];?></td>
+        <td><?= $row["qty_beli"];?></td>
+        <td><?= $row["total"];?></td>
+        <td><?= $row["tgl_update"];?></td>
+        <td><?= $row["tgl_input"];?></td>
+       </tr>
+       
+    <?php $i++; ?>
+    <?php endforeach; ?>
+    </table>
+    </div>
 </body>
-</html>';
-$mpdf->WriteHTML($html);
-$mpdf->Output('penjualan.pdf', 'I');
-
-?>
+</html>
