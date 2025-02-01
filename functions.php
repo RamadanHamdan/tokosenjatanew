@@ -46,6 +46,7 @@ function ubah($data) {
     $stock = htmlspecialchars($data["stock"]);
     $harga = htmlspecialchars($data["harga"]);
     $tgl_update = date("Y-m-d H:i:s");
+    $tgl_input = date("Y-m-d H:i:s");
     
     $query = "UPDATE tokosenjata SET
             id_barang = '$id_barang',
@@ -58,6 +59,7 @@ function ubah($data) {
             tgl_update = '$tgl_update'
             WHERE id = $id
             ";
+    $query = "INSERT INTO adjusment_stock VALUES (0,'$id_barang', '$nama_senjata', '$gambar', '$type_senjata', '$warna', '$stock' ,'$harga' ,'$tgl_input','$tgl_update')";
     mysqli_query($conn, $query);
     return mysqli_affected_rows($conn);
 }   
@@ -118,6 +120,11 @@ function hapus($id) {
     return mysqli_affected_rows($conn);
 }
 
+function hapus_transaksi($id_penjualan) {
+    global $conn;
+    mysqli_query($conn, "DELETE FROM penjualan WHERE id_penjualan = $id_penjualan");
+    return mysqli_affected_rows($conn);
+}
 
 function registrasi($data) {
     global $conn;
@@ -163,10 +170,15 @@ function beli($data) {
     $type_senjata = $data["type_senjata"];
     $warna = $data["warna"];
     $stock = $data["stock"];
-    $qty = $data["qty"];
+    $qty_beli = $data["qty_beli"];
     $total = $data["total"];
     $harga = $data["harga"];
     $sisa_stock = $data["sisa_stock"];
+    if(!empty($_POST(['beli']['error'] > 0 ))) {
+        $stock - $sisa_stock;
+    } else {
+        return $sisa_stock;
+    }
     $tgl_update = date("Y-m-d H:i:s");
     $tgl_input = date("Y-m-d H:i:s");
     $query = "UPDATE tokosenjata SET
@@ -178,11 +190,11 @@ function beli($data) {
             tgl_input = '$tgl_input',
             tgl_update = '$tgl_update',
             stock = '$stock',
-            sisa_stock = '$stock' - '$sisa_stock'
+            sisa_stock = '$sisa_stock'
             WHERE id = $id
             ";
     $query = "INSERT INTO penjualan VALUES 
-    (0 , '$id_barang','$nama_senjata', '$gambar', '$type_senjata', '$warna', '$qty', '$harga', '$total', '$tgl_input', '$tgl_update')";
+    (0 , '$id_barang','$nama_senjata', '$gambar', '$type_senjata', '$warna', '$qty_beli', '$harga', '$total', '$tgl_input', '$tgl_update')";
     mysqli_query($conn, $query);
     return mysqli_affected_rows($conn);
 }
@@ -206,3 +218,73 @@ function cari_penjualan($keyword) {
             ";
     return query($query);
 }
+
+function ubah_transaksi($data) {
+    global $conn;
+    $id = $data["id"];
+    $id_barang = htmlspecialchars($data["id_barang"]);
+    $nama_senjata = htmlspecialchars($data["nama_senjata"]);
+    $gambarlama = htmlspecialchars($data["gambarlama"]);
+    if($_FILES['gambar']['error'] === 4 ) {
+        $gambar = $gambarlama;
+    } else {
+        $gambar = upload();
+    }
+    $type_senjata = htmlspecialchars($data["type_senjata"]);
+    $warna = htmlspecialchars($data["warna"]);
+    $qty_beli = htmlspecialchars($data["qty_beli"]);
+    $harga = htmlspecialchars($data["harga"]);
+    $tgl_update = date("Y-m-d H:i:s");
+    $tgl_input = date("Y-m-d H:i:s");
+    
+    $query = "UPDATE penjualan SET
+            id_barang = '$id_barang',
+            nama_senjata = '$nama_senjata',
+            gambar = '$gambar',
+            type_senjata = '$type_senjata',
+            warna = '$warna',
+            qty_beli = '$qty_beli',
+            harga = '$harga',
+            tgl_update = '$tgl_update'
+            WHERE id = $id
+            ";
+    $query = "INSERT INTO adjusment_stock VALUES (0,'$id_barang', '$nama_senjata', '$gambar', '$type_senjata', '$warna', '$qty_beli' ,'$harga' ,'$tgl_input','$tgl_update')";
+    mysqli_query($conn, $query);
+    return mysqli_affected_rows($conn);
+}
+
+function cari_adjusment($keyword) {
+    $query = "SELECT * FROM adjusment_stock 
+            WHERE 
+            id_barang LIKE '%$keyword%' OR
+            nama_senjata LIKE '%$keyword%' OR
+            type_senjata LIKE '%$keyword%' OR
+            warna LIKE '%$keyword%' OR
+            harga LIKE '%$keyword%' 
+            ";
+    return query($query);
+}
+
+function generateInvoiceNumber($prefix = "INV", $yearFormat = "Y") {
+    $id = $_GET["id"];
+    $year = date($yearFormat);
+    static $counter = 1; // Static variable to keep track of the number
+
+    // Use a simple counter for demonstration.  In a real application,
+    // you would likely retrieve the last used number from a database.
+
+    $padded_number = str_pad($counter, 4, "0", STR_PAD_LEFT); // Pad with zeros
+    $invoice_number = $prefix . "-" . $year . "-" . $padded_number. $counter;
+    $counter++; // Increment for the next call
+
+    return $invoice_number;
+}
+
+// // Example usage:
+// echo generateInvoiceNumber(); // Output: INV-2023-0001 (assuming current year is 2023)
+// echo generateInvoiceNumber("ABC"); // Output: ABC-2023-0002
+// echo generateInvoiceNumber("XYZ", "y"); // Output: XYZ-23-0003
+
+// // Resetting the counter (if needed - usually not recommended):
+// $counter = 1;  // Resets the static counter. Use with caution.
+// echo generateInvoiceNumber(); // Output: INV-2023-0001 (starts over)
