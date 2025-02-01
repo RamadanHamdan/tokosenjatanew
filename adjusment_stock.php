@@ -11,8 +11,8 @@ $awalData = ($jumlahDataPerHalaman * $halamanAktif) - $jumlahDataPerHalaman;
 $weapon = query("SELECT id_barang,nama_senjata,gambar, type_senjata, warna, stock, harga, tgl_input, tgl_update 
 FROM adjusment_stock LIMIT 0 , $jumlahDataPerHalaman");
 
-if(isset($_POST["cari_penjualan"]) ) {
-    $weapon = cari_penjualan($_POST["keyword_penjualan"]);
+if(isset($_POST["cari_adjusment"]) ) {
+    $weapon = cari_adjusment($_POST["keyword_adjusment"]);
 }
 
 ?>
@@ -34,17 +34,17 @@ if(isset($_POST["cari_penjualan"]) ) {
         }
     </style>
     <script src="js/jquery-3.7.1.min.js"></script>
-    <script src="js/script_penjualan.js"></script>
+    <script src="js/script_adjusment.js"></script>
 </head>
 <body>
     <a href="logout.php" class="logout">Logout</a> | <a href="cetak.php" target="blank">Cetak</a> | <a href="print_penjualan.php" target="blank">Penjualan</a>
-    <h1>Daftar Senjata</h1>
+    <h1>Daftar Adjusment</h1>
 
-    <form action="" method="post" class="form-cari-penjualan">
+    <form action="" method="post" class="form-cari-adjusment">
 
-        <input type="text" name="keyword_penjualan" size="30"
-        autofocus placeholed="input here" autofocus="off" id="keyword_penjualan">
-        <button type="submit" name="cari_penjualan" id="tombol-cari-penjualan">Cari</button>
+        <input type="text" name="keyword_adjusment" size="30"
+        autofocus placeholed="input here" autofocus="off" id="keyword_adjusment">
+        <button type="submit" name="cari_adjusment" id="tombol-cari-adjusment">Cari</button>
 
         <img src="img/loader.gif" class="loader">
     </form><br>

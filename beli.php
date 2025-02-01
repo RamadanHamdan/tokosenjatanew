@@ -65,16 +65,20 @@ if(isset($_POST["beli"]) ) {
                 <input type="number" name="stock" id="stock" 
                 value="<?= $weapon["stock"];?>">
             </li>
-
+                <label for="sisa_stock"></label>
+                <input type="hidden" name="sisa_stock" id="sisa_stock" 
+                value="<?= $weapon["sisa_stock"];?>">
             <li>
-                <label for="qty">Quantity Beli</label>
-                <input type="number" name="qty" id="qty">
+                <label for="qty_beli">Quantity Beli</label>
+                <input type="number" name="qty_beli" id="qty_beli">
             </li>
             <li>
                 <label for="harga">Harga</label>
                 <input type="text" name="harga" id="harga"
                 value="<?= $weapon["harga"];?>">
             </li>
+                <label for="total"></label>
+                <input type="hidden" name="total" id="total">
             <li>
                 <label for="tgl_input">Tanggal</label>
                 <input type="date" class="form-control" name="tgl_input" id="tgl_input" 

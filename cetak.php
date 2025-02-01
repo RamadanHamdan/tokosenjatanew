@@ -23,6 +23,7 @@ $html = '<!DOCTYPE html>
         <th>Gambar</th>
         <th>Type Senjata</th>
         <th>Warna</th>
+        <th>Stock</th>
     </tr>';
     $i = 1;
     foreach($weapon as $row) {
@@ -32,6 +33,7 @@ $html = '<!DOCTYPE html>
             <td><img src="img/'. $row["gambar"] .'" width="50"></td>
             <td>'. $row["type_senjata"].'</td>
             <td>'. $row["warna"].'</td>
+            <td>'. $row["stock"].'</td>
         </tr>';
     }
 

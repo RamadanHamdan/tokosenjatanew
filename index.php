@@ -33,12 +33,12 @@ $awalData = ($jumlahDataPerHalaman * $halamanAktif) - $jumlahDataPerHalaman;
                                             tokosenjata.warna,
                                             tokosenjata.stock,
                                             SUM(tokosenjata.sisa_stock) AS sisa_stock,
-                                            SUM(penjualan.qty_beli - tokosenjata.stock) AS sisa_stock,
+                                            SUM(tokosenjata.stock - penjualan.qty_beli) AS sisa_stock,
                                             tokosenjata.harga,
                                             tokosenjata.tgl_input,
                                             tokosenjata.tgl_update
                                         FROM 
-                                            tokosenjata 
+                                            tokosenjata
                                         LEFT JOIN 
                                             penjualan 
                                         ON 
@@ -54,7 +54,7 @@ $awalData = ($jumlahDataPerHalaman * $halamanAktif) - $jumlahDataPerHalaman;
                                             tokosenjata.sisa_stock,
                                             tokosenjata.harga,
                                             tokosenjata.tgl_input,
-                                            tokosenjata.tgl_update");
+                                            tokosenjata.tgl_update LIMIT 0, $jumlahDataPerHalaman");
 
 
 
@@ -82,7 +82,7 @@ if(isset($_POST["cari"]) ) {
     <script src="js/script.js"></script>
 </head>
 <body>
-    <a href="logout.php" class="logout">Logout</a> | <a href="cetak.php" target="blank">Cetak</a> | <a href="penjualan.php" target="blank">Penjualan</a>
+    <a href="logout.php" class="logout">Logout</a> | <a href="cetak.php" target="blank">Cetak</a> | <a href="penjualan.php" target="blank">Penjualan</a> | <a href="adjusment_stock.php" target="blank">Adj_Stock</a>
     <h1>Daftar Senjata</h1>
     <a href="tambah.php">Tambah Data Senjata</a><br><br>
 
