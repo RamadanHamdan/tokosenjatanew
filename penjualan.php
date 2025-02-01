@@ -8,7 +8,8 @@ $jumlahHalaman = ceil($jumlahData / $jumlahDataPerHalaman);
 $halamanAktif = (isset($_GET["halaman"]) ) ? $_GET["halaman"] : 1;
 $awalData = ($jumlahDataPerHalaman * $halamanAktif) - $jumlahDataPerHalaman;
 
-$weapon = query("SELECT id_barang,nama_senjata,gambar, type_senjata, warna, qty_beli, harga, total, tgl_input, tgl_update FROM penjualan");
+$weapon = query("SELECT id_penjualan, id_barang,nama_senjata,gambar, type_senjata, warna, SUM(qty_beli) AS qty_beli, harga, total, tgl_input, tgl_update 
+FROM penjualan GROUP BY id_penjualan, id_barang,nama_senjata,gambar, type_senjata, warna, harga, total, tgl_input, tgl_update  LIMIT 0, $jumlahDataPerHalaman");
 
 if(isset($_POST["cari_penjualan"]) ) {
     $weapon = cari_penjualan($_POST["keyword_penjualan"]);
@@ -22,7 +23,7 @@ if(isset($_POST["cari_penjualan"]) ) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daftar Senjata</title>
+    <title>Daftar Penjualan</title>
     <style>
         .loader {
             width: 100px;
@@ -36,8 +37,8 @@ if(isset($_POST["cari_penjualan"]) ) {
     <script src="js/script_penjualan.js"></script>
 </head>
 <body>
-    <a href="logout.php" class="logout">Logout</a> | <a href="cetak.php" target="blank">Cetak</a> | <a href="print_penjualan.php" target="blank">Penjualan</a>
-    <h1>Daftar Senjata</h1>
+    <a href="logout.php" class="logout">Logout</a> | <a href="print_penjualan.php" target="blank">Penjualan</a>
+    <h1>Daftar Penjualan</h1>
 
     <form action="" method="post" class="form-cari-penjualan">
 
@@ -71,6 +72,7 @@ if(isset($_POST["cari_penjualan"]) ) {
     <table border="5" cellpadding="5" cellspacing="5">
     <tr>
         <th>No</th>
+        <th>Aksi</th>
         <th>Id Barang</th>
         <th>Nama Senjata</th>
         <th>Gambar</th>
@@ -80,13 +82,18 @@ if(isset($_POST["cari_penjualan"]) ) {
         <th>Harga</th>
         <th>Total</th>
         <th>Tanggal Update</th>
-        <th>Tanggal Input</th>
-
+        <th>Tanggal Input</th>        
     </tr>
     <?php $i = 1; ?>
     <?php foreach ($weapon as $row) : ?>
        <tr>
     <td><?= $i; ?></td>
+    <td>
+            <a href="print.php?id=<?= $row["id_penjualan"]; ?>">invoice</a> |
+            <a href="ubah_transaksi.php?id=<?= $row["id_penjualan"]; ?>">ubah</a> |
+            <a href="hapus_transaksi.php?id=<?= $row["id_penjualan"]; ?>" onclick="
+                return confirm('sure?');">hapus</a>
+        </td>
         <td><?= $row["id_barang"];?></td>
         <td><?= $row["nama_senjata"];?></td>
         <td><img src="img/<?= $row["gambar"];?>"width="100"></td>
