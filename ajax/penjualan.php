@@ -9,7 +9,8 @@ $query = "SELECT id_barang,nama_senjata,gambar, type_senjata, warna, qty_beli, h
             id_barang LIKE '%$keyword%' OR 
             nama_senjata LIKE '%$keyword%' OR
             type_senjata LIKE '%$keyword%' OR
-            warna LIKE '%$keyword%'
+            warna LIKE '%$keyword%' OR
+            tgl_input LIKE '%$keyword%'
             ";
 $weapon = query($query);
 
