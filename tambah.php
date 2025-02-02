@@ -27,51 +27,71 @@ if(isset($_POST["submit"]) ) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" 
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/@floating-ui/core@1.6.9"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@floating-ui/dom@1.6.13"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"></script>
+    <script src="js/jquery-3.7.1.min.js"></script>
+    <script src="js/script.js"></script>
     <title>Tambah Data Senjata</title>
 </head>
 <body>
     <h1>Tambah Data Senjata</h1>
-    <form action="" method="post">
     <ul>
-            <label for="id_barang">SKU</label>
-            <input type="text" name="id_barang" id="id_barang">
-        <li>
-            <label for="nama_senjata">Nama Senjata</label>
-            <input type="text" name="nama_senjata" id="nama_senjata">
-        </li>
-        <li>
-            <label for="gambar">Gambar</label>
-            <input type="file" name="gambar" id="gambar">
-        </li>
-        <li>
-            <label for="type_senjata">Type Senjata</label>
-            <input type="text" name="type_senjata" id="type_senjata">
-        </li>
-        <li>
-            <label for="warna">Warna</label>
-            <input type="text" name="warna" id="warna">
-        </li>
-        <li>
-            <label for="stock">Stock</label>
-            <input type="number" name="stock" id="stock">
-        </li>
-        <li>
-            <label for="sisa_stock">Stock Awal</label>
-            <input type="number" name="sisa_stock" id="sisa_stock">
-        </li>
-        <li>
-            <label for="harga">Harga</label>
-            <input type="text" name="harga" id="harga"><br>
-        <li>
-            <label for="tgl_input">Tanggal</label>
-            <input type="date" class="form-control" name="tgl_input" id="tgl_input" 
-                value="<?=date("j F Y, G:i");?>">
-        </li>
-        <button type="submit" name="submit">Tambah</button>
-        <li>
-            <a href="index.php">Lihat Data</a>
-        </li>
-    </ul>
-    </form>
+    <form action="" method="post" class="row g-3">
+ <div class="col-md-2">
+    <label for="id_barang" class="form-label">Id Barang</label>
+    <input type="text" class="form-control" id="id_barang">
+ </div>
+  <div class="col-md-5">
+    <label for="nama_senjata" class="form-label">Nama Senjata</label>
+    <input type="text" class="form-control" id="nama_senjata">
+  </div>
+  <div class="col-md-4">
+    <label for="gambar" class="form-label">Gambar</label>
+    <input type="file" class="form-control" id="gambar" placeholder="input gambar">
+  </div>
+<li>
+  <div class="col-md-2">
+    <label for="type_senjata" class="form-label">Type Senjata</label>
+    <input type="text" class="form-control" id="type_senjata" placeholder="Type">
+  </div>
+</li>
+  <div class="col-md-2">
+    <label for="warna" class="form-label">Warna</label>
+    <input type="text" class="form-control" id="warna">
+  </div>
+
+  <div class="col-md-1">
+    <label for="stock" class="form-label">Stock</label>
+    <input type="number" class="form-control" id="stock">
+  </div>
+
+
+  <div class="col-md-1">
+    <label for="sisa_stock" class="form-label">Stock Awal</label>
+    <input type="number" class="form-control" id="sisa_stock">
+  </div>
+
+
+  <div class="col-md-2">
+    <label for="harga" class="form-label">Harga</label>
+    <input type="text" class="form-control" id="harga">
+  </div>
+
+<li>
+  <div class="col-md-2">
+    <label for="tgl_input" class="form-label">Tanggal Input</label>
+    <input type="date" class="form-control" id="tgl_input" value="<?=date("j F Y, G:i");?>">
+  </div>
+</li>
+  <div class="col-12">
+    <button type="submit" name="submit" class="btn btn-primary">Tambah Data</button>
+  </div>
+  <a href="index.php">Lihat Data</a>
+  </ul>
+</form>
 </body>
 </html>
