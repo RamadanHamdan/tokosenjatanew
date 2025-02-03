@@ -68,32 +68,61 @@ if(isset($_POST["cari"]) ) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" 
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <title>Daftar Senjata</title>
-    <style>
-        .loader {
-            width: 100px;
-            position: absolute;
-            top: 100px;
-            z-index: -1;
-            display: none;
-        }
-    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@floating-ui/core@1.6.9"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@floating-ui/dom@1.6.13"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"></script>
     <script src="js/jquery-3.7.1.min.js"></script>
     <script src="js/script.js"></script>
 </head>
 <body>
-    <a href="logout.php" class="logout">Logout</a> | <a href="cetak.php" target="blank">Cetak</a> | <a href="penjualan.php" target="blank">Penjualan</a> | <a href="adjusment_stock.php" target="blank">Adj_Stock</a>
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Adan Gunshop</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="index.php">Dashboard</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="cetak.php">Cetak</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Dropdown
+          </a>
+          <div class=".dropdown">
+    <ul class="dropdown-menu">
+    <li><a class="dropdown-item" href="tambah.php">Tambah Data</a></li>
+    <li><a class="dropdown-item" href="penjualan.php">Penjualan</a></li>
+    <li><a class="dropdown-item" href="adjusment_stock.php">Adjusment Stock</a></li>
+    </ul>
+    </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="logout.php">Logout</a>
+        </li>
+      </ul>
+      <form action="" class="form-cari" method="post" role="search">
+        <input class="form-control me-2" type="search" id="keyword" name="keyword" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" name="cari" id="tombol-cari" type="submit">Search</button>
+      </form>
+    </div>
+  </div>
+</nav>
     <h1>Daftar Senjata</h1>
-    <a href="tambah.php">Tambah Data Senjata</a><br><br>
-
-    <form action="" method="post" class="form-cari">
+    <!-- <form action="" method="post" class="form-cari">
 
         <input type="text" name="keyword" size="30"
         autofocus placeholed="input here" autofocus="off" id="keyword">
         <button type="submit" name="cari" id="tombol-cari">Cari</button>
-
-        <img src="img/loader.gif" class="loader">
-    </form><br>
+    </form><br> -->
     <div id="container">
     <!-- page navigasi -->
     <?php if( $halamanAktif > 1) : ?>
@@ -115,7 +144,7 @@ if(isset($_POST["cari"]) ) {
 
     </form><br>
     
-    <table border="5" cellpadding="5" cellspacing="5">
+    <table class="table table-striped-columns" border="5" cellpadding="5" cellspacing="5">
     <tr>
         <th>No</th>
         <th>Aksi</th>
