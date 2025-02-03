@@ -15,7 +15,7 @@ $query = "SELECT id_barang,nama_senjata,gambar, type_senjata, warna, qty_beli, h
 $weapon = query($query);
 
 ?>
-<table border="5" cellpadding="5" cellspacing="5">
+<table class="table table-bordered">
     <tr>
         <th>No</th>
         <th>Null</th>
