@@ -23,6 +23,15 @@ if(isset($_POST["cari_penjualan"]) ) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link src="node_modules/bootstrap/scss/_mixins.scss" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/@floating-ui/core@1.6.9"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@floating-ui/dom@1.6.13"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"></script>
+    <script src="js/jquery-3.7.1.min.js"></script>
+    <script src="js/script.js"></script>
     <title>Daftar Penjualan</title>
     <style>
         .loader {
@@ -37,17 +46,44 @@ if(isset($_POST["cari_penjualan"]) ) {
     <script src="js/script_penjualan.js"></script>
 </head>
 <body>
-    <a href="logout.php" class="logout">Logout</a> | <a href="print_penjualan.php" target="blank">Penjualan</a>
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Adan Gunshop</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="index.php">Dashboard</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="cetak.php">Cetak</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Dropdown
+          </a>
+          <div class=".dropdown">
+    <ul class="dropdown-menu">
+    <li><a class="dropdown-item" href="tambah.php">Tambah Data</a></li>
+    <li><a class="dropdown-item" href="penjualan.php">Penjualan</a></li>
+    <li><a class="dropdown-item" href="adjusment_stock.php">Adjusment Stock</a></li>
+    </ul>
+    </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="logout.php">Logout</a>
+        </li>
+      </ul>
+      <form action="" class="form-cari-penjualan" method="post" role="search">
+        <input class="form-control me-2" type="search" id="keyword_penjualan" name="keyword_penjualan" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" name="cari_penjualan" id="tombol-cari-penjualan" type="submit">Search</button>
+      </form>
+    </div>
+  </div>
+</nav>
     <h1>Daftar Penjualan</h1>
-
-    <form action="" method="post" class="form-cari-penjualan">
-
-        <input type="text" name="keyword_penjualan" size="30"
-        autofocus placeholed="input here" autofocus="off" id="keyword_penjualan">
-        <button type="submit" name="cari_penjualan" id="tombol-cari-penjualan">Cari</button>
-
-        <img src="img/loader.gif" class="loader">
-    </form><br>
     <div id="container">
     <!-- page navigasi -->
     <?php if( $halamanAktif > 1) : ?>
@@ -69,7 +105,7 @@ if(isset($_POST["cari_penjualan"]) ) {
 
     </form><br>
     
-    <table border="5" cellpadding="5" cellspacing="5">
+    <table class="table table-bordered">
     <tr>
         <th>No</th>
         <th>Aksi</th>
