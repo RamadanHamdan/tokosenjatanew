@@ -13,7 +13,7 @@ $query = "SELECT * FROM tokosenjata
 $weapon = query($query);
 
 ?>
-<table class="table-table-bordered">
+<table class="table table-striped-columns">
     <tr>
         <th>No</th>
         <th>Aksi</th>

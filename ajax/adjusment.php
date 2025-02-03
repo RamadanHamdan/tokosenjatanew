@@ -15,7 +15,7 @@ $query = "SELECT id_barang,nama_senjata,gambar, type_senjata, warna, stock, harg
 $weapon = query($query);
 
 ?>
-<table class="table table-bordered">
+<table class="table table-striped-columns">
     <tr>
         <th>No</th>
         <th>Null</th>
