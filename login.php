@@ -100,7 +100,7 @@ if(isset($_POST["login"]) ) {
   <label for="remember">Remember</label>
     <input type="checkbox" id="remember" name="remember">
     <div class="col-auto">
-    <button type="submit" name="login" class="btn btn-primary mb-3">Confirm identity</button>
+    <button type="submit" name="login" class="btn btn-primary mb-3">Login</button>
     </div>
   </form> <br>
   </div>
