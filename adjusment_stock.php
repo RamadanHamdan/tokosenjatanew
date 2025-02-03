@@ -57,7 +57,7 @@ if(isset($_POST["cari_adjusment"]) ) {
           <a class="nav-link active" aria-current="page" href="index.php">Dashboard</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="cetak.php">Cetak</a>
+          <a class="nav-link" href="print_adjusment.php">Cetak</a>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="" role="button" data-bs-toggle="dropdown" aria-expanded="false">

@@ -2,7 +2,7 @@
 
 require 'functions.php';
 
-$jumlahDataPerHalaman = 10;
+$jumlahDataPerHalaman = 100;
 $jumlahData = count(query("SELECT * FROM penjualan"));
 $jumlahHalaman = ceil($jumlahData / $jumlahDataPerHalaman);
 $halamanAktif = (isset($_GET["halaman"]) ) ? $_GET["halaman"] : 1;
@@ -58,7 +58,7 @@ if(isset($_POST["cari_penjualan"]) ) {
           <a class="nav-link active" aria-current="page" href="index.php">Dashboard</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="cetak.php">Cetak</a>
+          <a class="nav-link" href="print_penjualan.php">Cetak</a>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="" role="button" data-bs-toggle="dropdown" aria-expanded="false">
