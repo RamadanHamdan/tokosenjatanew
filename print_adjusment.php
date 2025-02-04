@@ -23,8 +23,8 @@ $html = '<!DOCTYPE html>
         <th>Gambar</th>
         <th>Type Senjata</th>
         <th>Warna</th>
-        <th>Qty</th>
-        <th>Total</th>
+        <th>Adj Stock</th>
+        <th>Harga</th>
         <th>Tanggal Transaksi</th>
     </tr>';
     $i = 1;
@@ -36,7 +36,7 @@ $html = '<!DOCTYPE html>
             <td>'. $row["type_senjata"].'</td>
             <td>'. $row["warna"].'</td>
             <td>'. $row["stock"].'</td>
-            <td>'. $row["total"].'</td>
+            <td>'. $row["harga"].'</td>
             <td>'. $row["tgl_input"].'</td>
         </tr>';
     }
