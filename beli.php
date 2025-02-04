@@ -105,7 +105,7 @@ if(isset($_POST["beli"]) ) {
             </div>
             <div class="col-md-3">
                 <label for="stock" class="form-label">Stock</label>
-                <input type="number" class="form-control" name="stock" id="stock" 
+                <input type="number" class="form-control" readonly name="stock" id="stock" 
                 value="<?= $weapon["stock"];?>"> 
             </div>
             <div class="col-md-4">
@@ -115,7 +115,7 @@ if(isset($_POST["beli"]) ) {
             </div>
            <div class="col-md-3">
                 <label for="qty_beli" class="form-label">Quantity Beli</label>
-                <input type="number" class="form-control" name="qty_beli" id="qty_beli">
+                <input type="number" class="form-control" name="qty_beli" id="qty_beli" min="1" max="">
             </div>
             <div class="col-md-3">
                 <label for="harga" class="form-label">Harga</label>
