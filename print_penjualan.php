@@ -11,8 +11,8 @@ $html = '<!DOCTYPE html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daftar Senjata</title>
     <link rel="stylesheet" href="css/print.css">
+    <title>Daftar Senjata</title>
 </head>
 <body>
     <h1>Daftar Penjualan</h1>
@@ -24,6 +24,7 @@ $html = '<!DOCTYPE html>
         <th>Type Senjata</th>
         <th>Warna</th>
         <th>Qty</th>
+        <th>Harga</th>
         <th>Total</th>
         <th>Tanggal Transaksi</th>
     </tr>';
@@ -36,6 +37,7 @@ $html = '<!DOCTYPE html>
             <td>'. $row["type_senjata"].'</td>
             <td>'. $row["warna"].'</td>
             <td>'. $row["qty_beli"].'</td>
+            <td>'. $row["harga"].'</td>
             <td>'. $row["total"].'</td>
             <td>'. $row["tgl_input"].'</td>
         </tr>';
