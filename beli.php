@@ -18,7 +18,6 @@ if(isset($_POST["beli"]) ) {
         </script>";
     }
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -115,7 +114,7 @@ if(isset($_POST["beli"]) ) {
             </div>
            <div class="col-md-3">
                 <label for="qty_beli" class="form-label">Quantity Beli</label>
-                <input type="number" class="form-control" name="qty_beli" id="qty_beli" min="1" max="">
+                <input type="number" class="form-control" name="qty_beli" id="qty_beli" min="1">
             </div>
             <div class="col-md-3">
                 <label for="harga" class="form-label">Harga</label>
