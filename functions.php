@@ -174,11 +174,6 @@ function beli($data) {
     $total = $data["total"];
     $harga = $data["harga"];
     $sisa_stock = $data["sisa_stock"];
-    // if(!empty($_POST(['beli']['error'] > 0 ))) {
-    //     $stock - $sisa_stock;
-    // } else {
-    //     return $sisa_stock;
-    // }
     $tgl_update = date("Y-m-d H:i:s");
     $tgl_input = date("Y-m-d H:i:s");
     $query = "UPDATE tokosenjata SET
