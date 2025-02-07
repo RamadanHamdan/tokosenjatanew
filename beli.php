@@ -85,22 +85,22 @@ if(isset($_POST["beli"]) ) {
                 value="<?= $weapon["id_barang"];?>">     
             <div class="col-md-3">
                 <label for="nama_senjata" class="form-label">Nama Senjata</label>
-                <input type="text" class="form-control" name="nama_senjata" id="nama_senjata" 
+                <input type="text" class="form-control" readonly name="nama_senjata" id="nama_senjata" 
                 value="<?= $weapon["nama_senjata"];?>">
             </div>
             <div class="col-md-3">
                 <label for="gambar" class="form-label">Gambar</label>
                 <img src="img/<?= $weapon["gambar"];?>" width="90">
-                <input type="file" class="form-control" name="gambar" id="gambar">
+                <input type="file" class="form-control" readonly name="gambar" id="gambar">
             </div>
             <div class="col-md-4">
                 <label for="type_senjata" class="form-label">Type_Senjata</label>
-                <input type="text" class="form-control" name="type_senjata" id="type_senjata" 
+                <input type="text" class="form-control" readonly name="type_senjata" id="type_senjata" 
                 value="<?= $weapon["type_senjata"];?>">
             </div>
             <div class="col-md-3">
                 <label for="warna" class="form-label">Warna</label>
-                <input type="text" class="form-control" name="warna" id="warna" 
+                <input type="text" class="form-control" readonly name="warna" id="warna" 
                 value="<?= $weapon["warna"];?>">
             </div>
             <div class="col-md-3">
@@ -119,7 +119,7 @@ if(isset($_POST["beli"]) ) {
             </div>
             <div class="col-md-3">
                 <label for="harga" class="form-label">Harga</label>
-                <input type="text" class="form-control" name="harga" id="harga"
+                <input type="text" class="form-control" readonly name="harga" id="harga"
                 value="<?= $weapon["harga"];?>">
             </div>
                 <label for="total"></label>
