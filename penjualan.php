@@ -2,7 +2,7 @@
 
 require 'functions.php';
 
-$jumlahDataPerHalaman = 100;
+$jumlahDataPerHalaman = 30;
 $jumlahData = count(query("SELECT * FROM penjualan"));
 $jumlahHalaman = ceil($jumlahData / $jumlahDataPerHalaman);
 $halamanAktif = (isset($_GET["halaman"]) ) ? $_GET["halaman"] : 1;
