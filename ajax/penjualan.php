@@ -4,7 +4,7 @@ require '../functions.php';
 
 $keyword = $_GET["keyword_penjualan"];
 
-$query = "SELECT id_barang,nama_senjata,gambar, type_senjata, warna, qty_beli, harga, total, tgl_input, tgl_update FROM penjualan 
+$query = "SELECT id_penjualan, id_barang,nama_senjata,gambar, type_senjata, warna, qty_beli, harga, total, tgl_input, tgl_update FROM penjualan 
             WHERE
             id_barang LIKE '%$keyword%' OR 
             nama_senjata LIKE '%$keyword%' OR
@@ -19,6 +19,7 @@ $weapon = query($query);
     <tr>
         <th>No</th>
         <th>Null</th>
+        <th>Aksi</th>
         <th>Id Barang</th>
         <th>Nama Senjata</th>
         <th>Gambar</th>
@@ -35,6 +36,11 @@ $weapon = query($query);
        <tr>
     <td><?= $i; ?></td>
     <td>
+        </td>
+        <td>
+            <a href="ubah.php?id=<?= $row["id_penjualan"]; ?>">ubah</a>
+            <a href="hapus.php?id=<?= $row["id_penjualan"]; ?>" onclick="
+                return confirm('sure?');">hapus</a>
         </td>
         <td><?= $row["id_barang"];?></td>
         <td><?= $row["nama_senjata"];?></td>
