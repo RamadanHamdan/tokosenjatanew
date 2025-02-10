@@ -21,7 +21,6 @@ $awalData = ($jumlahDataPerHalaman * $halamanAktif) - $jumlahDataPerHalaman;
                                             tokosenjata.gambar,
                                             tokosenjata.type_senjata,
                                             tokosenjata.warna,
-                                            SUM(tokosenjata.stock - penjualan.qty_beli) as sisa_stock,
                                             tokosenjata.stock,
                                             tokosenjata.sisa_stock,
                                             tokosenjata.harga,

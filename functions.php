@@ -174,21 +174,19 @@ function beli($data) {
     $stock = $data["stock"];
     $total = $data["total"];
     $qty_beli = $data["qty_beli"];
+    do {
+        $stock - $qty_beli;
+        if($qty_beli > 1 ) continue;
+            echo $stock;
+        } while($qty_beli === 0);
     $harga = $data["harga"];
     $sisa_stock = $data["sisa_stock"];
     do {
         $total = $qty_beli * $harga;
-        $stock = $stock - $qty_beli;
         if($qty_beli > 1 ) continue;
             echo $total;
-            echo $stock;
         } while($qty_beli === 0);
-        // $new_stock = update_stock($id_barang, -$qty_beli); // Negative for sale
-        // if ($sisa_stock !== false) {
-        //     echo "New stock for item $id_barang: " . $sisa_stock . "\n"; // Output: New stock for item 2: 0
-        // } else { 
-        //     echo "Item not found.\n";
-        // }
+    
     $tgl_update = date("Y-m-d H:i:s");
     $tgl_input = date("Y-m-d H:i:s");
     $query = "UPDATE tokosenjata SET
@@ -199,7 +197,7 @@ function beli($data) {
             warna = '$warna',
             tgl_input = '$tgl_input',
             tgl_update = '$tgl_update',
-            stock = '$stock',
+            stock = '$stock' - '$qty_beli',
             sisa_stock = '$sisa_stock'
             WHERE id = $id
             ";
