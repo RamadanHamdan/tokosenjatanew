@@ -13,17 +13,7 @@ $jumlahHalaman = ceil($jumlahData / $jumlahDataPerHalaman);
 $halamanAktif = (isset($_GET["halaman"]) ) ? $_GET["halaman"] : 1;
 $awalData = ($jumlahDataPerHalaman * $halamanAktif) - $jumlahDataPerHalaman;
 
-
-// $weapon = query("SELECT tokosenjata.id_barang,
-//                         penjualan.id_barang
-//                         FROM 
-//                         tokosenjata 
-//                         LEFT JOIN penjualan ON tokosenjata.id_barang = penjualan.id_barang GROUP BY tokosenjata.id_barang,
-//                         SELECT tokosenjata.nama_senjata,
-//                         penjualan.nama_senjata
-//                         FROM
-//                         tokosenjata
-//                         LEFT JOIN penjualan ON tokosenjata.nama_senjata = penjualan.nama_senjata GROUP BY tokosenjata.nama_senjata");
+// $weapon = query("SELECT * FROM tokosenjata LIMIT $awalData, $jumlahDataPerHalaman");
                         $weapon = query("SELECT
                                             tokosenjata.id, 
                                             tokosenjata.id_barang,
@@ -31,6 +21,7 @@ $awalData = ($jumlahDataPerHalaman * $halamanAktif) - $jumlahDataPerHalaman;
                                             tokosenjata.gambar,
                                             tokosenjata.type_senjata,
                                             tokosenjata.warna,
+                                            SUM(tokosenjata.stock - penjualan.qty_beli) as sisa_stock,
                                             tokosenjata.stock,
                                             tokosenjata.sisa_stock,
                                             tokosenjata.harga,
