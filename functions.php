@@ -44,6 +44,7 @@ function ubah($data) {
     $type_senjata = htmlspecialchars($data["type_senjata"]);
     $warna = htmlspecialchars($data["warna"]);
     $stock = htmlspecialchars($data["stock"]);
+    $sisa_stock = htmlspecialchars($data["sisa_stock"]);
     $harga = htmlspecialchars($data["harga"]);
     $tgl_update = date("Y-m-d H:i:s");
     $tgl_input = date("Y-m-d H:i:s");
@@ -55,6 +56,7 @@ function ubah($data) {
             type_senjata = '$type_senjata',
             warna = '$warna',
             stock = '$stock',
+            sisa_stock = '$sisa_stock',
             harga = '$harga',
             tgl_update = '$tgl_update'
             WHERE id = $id
@@ -170,10 +172,23 @@ function beli($data) {
     $type_senjata = $data["type_senjata"];
     $warna = $data["warna"];
     $stock = $data["stock"];
-    $qty_beli = $data["qty_beli"];
     $total = $data["total"];
+    $qty_beli = $data["qty_beli"];
     $harga = $data["harga"];
     $sisa_stock = $data["sisa_stock"];
+    do {
+        $total = $qty_beli * $harga;
+        $stock = $stock - $qty_beli;
+        if($qty_beli > 1 ) continue;
+            echo $total;
+            echo $stock;
+        } while($qty_beli === 0);
+        // $new_stock = update_stock($id_barang, -$qty_beli); // Negative for sale
+        // if ($sisa_stock !== false) {
+        //     echo "New stock for item $id_barang: " . $sisa_stock . "\n"; // Output: New stock for item 2: 0
+        // } else { 
+        //     echo "Item not found.\n";
+        // }
     $tgl_update = date("Y-m-d H:i:s");
     $tgl_input = date("Y-m-d H:i:s");
     $query = "UPDATE tokosenjata SET
@@ -274,12 +289,29 @@ function generateInvoiceNumber($prefix = "INV", $yearFormat = "Y") {
 
     return $invoice_number;
 }
+// function update_stock($id_barang, $sisa_stock) {
+//     static $stock = [
+//       1 => 100,
+//       2 => 50,
+//       3 => 25,
+//     ];
 
-// // Example usage:
-// echo generateInvoiceNumber(); // Output: INV-2023-0001 (assuming current year is 2023)
-// echo generateInvoiceNumber("ABC"); // Output: ABC-2023-0002
-// echo generateInvoiceNumber("XYZ", "y"); // Output: XYZ-23-0003
+//     if (isset($stock[$id_barang])) {
+//         $stock[$id_barang] += $sisa_stock;
+//         if ($stock[$id_barang] < 0) {
+//           $stock[$id_barang] = 0; // Prevent negative stock
+//         }
+//         return $stock[$id_barang];
+//       } else {
+//         return false; // Item not found
+//       }
+//     }
 
-// // Resetting the counter (if needed - usually not recommended):
-// $counter = 1;  // Resets the static counter. Use with caution.
-// echo generateInvoiceNumber(); // Output: INV-2023-0001 (starts over)
+// $id_barang = ['id_barang'];
+// $qty_beli = ['qty_beli'];
+// $new_stock = update_stock($id_barang, -$qty_beli); // Negative for sale
+// if ($sisa_stock !== false) {
+//     echo "New stock for item $id_barang: " . $sisa_stock . "\n"; // Output: New stock for item 2: 0
+// } else {
+//     echo "Item not found.\n";
+// }

@@ -18,6 +18,7 @@ if(isset($_POST["beli"]) ) {
         </script>";
     }
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -112,7 +113,7 @@ if(isset($_POST["beli"]) ) {
                 <input type="hidden" class="form-control" name="sisa_stock" id="sisa_stock" 
                 value="<?= $weapon["sisa_stock"];?>">
             </div>
-           <div class="col-md-3">
+            <div class="col-md-3">
                 <label for="qty_beli" class="form-label">Quantity Beli</label>
                 <input type="number" class="form-control" name="qty_beli" id="qty_beli" min="1">
             </div>
@@ -121,8 +122,10 @@ if(isset($_POST["beli"]) ) {
                 <input type="text" class="form-control" readonly name="harga" id="harga"
                 value="<?= $weapon["harga"];?>">
             </div>
+
                 <label for="total"></label>
                 <input type="hidden" name="total" id="total">
+
             <div class="col-md-4">
                 <label for="tgl_input">Tanggal</label>
                 <input type="date" class="form-control" name="tgl_input" id="tgl_input" 
